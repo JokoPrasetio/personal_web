@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Situs ini berisi informasi tentang saya, tulisan, dan opini saya. Sebagian besar konten adalah dokumentasi pribadi selama belajar dan berbagi pengetahuan">
+    <meta name="keywords" content="Informasi, Teknologi, Jasa Bikin Web, Jasa Bikin Aplikasi, Blog Pribadi">
+    <meta name="author" content="Rumah Jooocode">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <title>Rumah Jooocode</title>
+
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/global.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col min-h-screen font-[Inter]">
+    <header class="sticky top-0 z-50 bg-white/80 white:bg-gray-900/80 backdrop-blur border-b border-gray-200 white:border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 flex items-center justify-between h-16">
+            <a href="/" class="font-bold text-xl">Rumah Jooocode</a>
+
+            <nav class="hidden md:flex gap-6">
+                <a href="#konten" class="hover:text-yellow-600 transition">Konten</a>
+                <a href="#history" class="hover:text-yellow-600 transition">Pengalaman Bekerja</a>
+                <a href="#produk" class="hover:text-yellow-600 transition">Produk</a>
+                <a href="https://blog.rumahjooocode.com" class="hover:text-yellow-600 transition">Blog</a>
+                <a href="#kontak" class="hover:text-yellow-600 transition">Kontak</a>
+            </nav>
+
+             <!-- Mobile toggle -->
+            <button id="menu-toggle" class="md:hidden" aria-label="toggle menu">
+                <!-- pakai unicode icon -->
+                <span id="menu-icon">☰</span>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu absolute top-16 inset-x-0 bg-white border-t border-gray-200 md:hidden">
+            <div class="flex flex-col items-center gap-4 py-4">
+                <a href="#konten" class="w-full text-center py-2 hover:bg-gray-100">Konten</a>
+                <a href="#history" class="w-full text-center py-2 hover:bg-gray-100">History</a>
+                <a href="#produk" class="w-full text-center py-2 hover:bg-gray-100">Produk</a>
+                <a href="https://blog.rumahjooocode.com" class="w-full text-center py-2 hover:bg-gray-100">Blog</a>
+                <a href="#kontak" class="w-full text-center py-2 hover:bg-gray-100">Kontak</a>
+            </div>
+        </nav>
+    </header>
+    <main class="flex-1">
+        <section class="max-w-5xl mx-auto px-6 py-12 space-y-20">
+            <!-- Hero -->
+            <header class="flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-10">
+                <img src="assets/icon.png" alt="joko ganteng" width="100" height="100" class="rounded-full shadow-lg border-4 border-yellow-500">
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-3">
+                Hai, Saya <span class="text-yellow-500">Joko Prasetio</span> 👋
+                </h1>
+                <p class="text-gray-600 leading-relaxed max-w-2xl text-justify md:text-left">
+                Saya seorang <span class="font-medium text-gray-800">developer</span> 
+                yang tertarik dengan <span class="text-yellow-600 font-semibold">web development</span>, 
+                <span class="text-yellow-600 font-semibold"> AI</span>, dan 
+                <span class="text-yellow-600 font-semibold"> produk digital</span>. 
+                Situs ini berisi informasi tentang saya, tulisan, dan opini saya. 
+                Sebagian besar konten adalah dokumentasi pribadi selama belajar 
+                dan berbagi pengetahuan.
+                </p>
+                <blockquote class="mt-5 inline-block bg-yellow-500 text-black px-4 py-2 rounded-xl shadow-md italic font-medium">
+                “Berimimpilah setinggi langit, maka Tuhan akan memeluk mimpi-mimpimu.”
+                </blockquote>
+                </div>
+            </header>
+
+            <!-- Konten -->
+            <section id="konten" class="py-20 max-w-5xl mx-auto px-6">
+                <h2 class="text-2xl font-bold mb-6">Konten</h2>
+
+                <!-- container konten -->
+                <div id="konten-container"></div>
+            </section>
+
+            <!-- Pengalaman -->
+            <section id="history" class="py-20 ">
+                <h2 class="text-2xl font-bold mb-6">Pengalaman Bekerja</h2>
+                <div class="space-y-6 border-l-2 border-yellow-500 pl-6">
+
+                <!-- Job 1 -->
+                <div class="job">
+                        <button class="flex items-center justify-between w-full text-left p-3 rounded-lg hover:bg-yellow-50 transition cursor-pointer">
+                        <div>
+                            <h3 class="font-semibold">Staff IT (Juni 2023 - Juni 2025)</h3>
+                            <p class="text-gray-600 text-sm">PT Prima Indo Medilab</p>
+                        </div>
+                        <span class="arrow text-yellow-600 font-bold text-lg transition-transform">▼</span>
+                        </button>
+                        <div class="details max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                        <h4 class="font-semibold mb-2 mt-4">📂 Projects</h4>
+                        <div class="space-y-3">
+                            <div class="p-4 border rounded-lg shadow bg-gray-50">
+                            <h5 class="font-semibold">HRIS</h5>
+                            <p class="text-sm text-gray-600">Human Resource Information System untuk mengelola data karyawan, absensi, cuti, hingga payroll dalam satu platform. Memudahkan HR dalam monitoring dan laporan bulanan.</p>
+                            </div>
+                            <div class="p-4 border rounded-lg shadow bg-gray-50">
+                            <h5 class="font-semibold">CRM</h5>
+                            <p class="text-sm text-gray-600">Customer Relationship Management untuk mencatat interaksi pelanggan, mengelola leads, dan meningkatkan penjualan. Dilengkapi dengan dashboard analitik yang user-friendly.</p>
+                            </div>
+                            <div class="p-4 border rounded-lg shadow bg-gray-50">
+                            <h5 class="font-semibold">IMITRACKING</h5>
+                            <p class="text-sm text-gray-600">Aplikasi tracking berbasis web untuk memantau approval proses bisnis. Membantu perusahaan meningkatkan efisiensi dan transparansi operasional.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-semibold mb-2 mt-6">💬 Reviews</h4>
+                        <div class="space-y-3">
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Sangat memuaskan dan membanggakan."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Martina (Direktur - PT Prima Indo Medilab)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Pengalaman saya bekerja bersama Joko menyenangkan dan produktif. Joko selalu menunjukkan sikap profesional, responsif, dan solutif terhadap berbagai kebutuhan IT. Awalnya saya sempat mengira Joko pendiam, tapi ternyata Joko bisa beradaptasi dengan baik dan menunjukkan komunikasi yang efektif seiring waktu."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Maria Angel (HR & Legal Staff - PT Interskala mandiri Indonesia)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Pengalaman kerja sangat baik dan sangat membantu."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Valencia (HR Staff - PT Interskala Sehat Sejahtera)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Untuk pengalamannya banyak membantu sekali terutama mengenai problem saya pada saat input. Untuk itu terimkasih untuk pak joko selalu sabar, terimkasih pak, salam dari iqbal teknisi."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Iqbal (Admin Teknisi - PT Interskala mandiri Indonesia)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"baik."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Dandi (Gudang - PT Interskala mandiri Indonesia)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Memuaskan, di siplin, fast respon."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Mulyadi (Wakil Kepala Gudang - PT Interskala mandiri Indonesia)</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"puas."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Anonim</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Sangat berkesan, thanks bgt pak udah selalu bantuin gua, backup gua, segala hal yg kita buat bareng”. Mohon maaf kalo selama ini gua ada salah kata atau perbuatan. Sukses selalu."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Anonim</p>
+                                </div>
+                                <div class="p-3 border rounded-lg bg-yellow-50">
+                                    <p class="text-sm italic text-gray-700">"Pengalaman bekerja sama dengan anda selama 2 tahun ini cukup memuaskan saya dalam divisi administrasi pelayanan, sehingga saya banyak terbantu dengan adanya anda di team IT perusahaan PT. Prima Indo Medilab."</p>
+                                    <p class="text-xs text-gray-500 mt-1">— Anonim</p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job">
+                    <button class="flex items-center justify-between w-full text-left p-3 rounded-lg hover:bg-yellow-50 transition cursor-pointer">
+                    <div>
+                        <h3 class="font-semibold">Pranata Komputer (Juni 2025 - Sekarang)</h3>
+                        <p class="text-gray-600 text-sm">Rumah Sakit Anak Bunda Harapan Kita</p>
+                    </div>
+                    <span class="arrow text-yellow-600 font-bold text-lg transition-transform">▼</span>
+                    </button>
+                    <div class="details max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                    <h4 class="font-semibold mb-2 mt-4">📂 Projects</h4>
+                    <div class="space-y-3">
+                        <div class="p-4 border rounded-lg shadow bg-gray-50">
+                        <h5 class="font-semibold">Order Gizi</h5>
+                        <p class="text-sm text-gray-600">Website Pemesanan makanan bergizi di Rumah Sakit Anak Bunda Harapan Kita.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg shadow bg-gray-50">
+                        <h5 class="font-semibold">Back End</h5>
+                        <p class="text-sm text-gray-600">Membuat Api SIMRS.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job">
+                    <button class="flex items-center justify-between w-full text-left p-3 rounded-lg hover:bg-yellow-50 transition cursor-pointer">
+                    <div>
+                        <h3 class="font-semibold">Freelance</h3>
+                        <p class="text-gray-600 text-sm">Jarak Jauh</p>
+                    </div>
+                    <span class="arrow text-yellow-600 font-bold text-lg transition-transform">▼</span>
+                    </button>
+                    <div class="details max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                    <h4 class="font-semibold mb-2 mt-4">📂 Projects</h4>
+                    <div class="space-y-3">
+                        <div class="p-4 border rounded-lg shadow bg-gray-50">
+                        <h5 class="font-semibold">Procurement</h5>
+                        <p class="text-sm text-gray-600">Mengembangkan Website Pengadaan mempermudah proses tawar menawar, pencatatan, laporan dalam melakukan pengadaan pengadaan barang.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg shadow bg-gray-50">
+                        <h5 class="font-semibold">Fixing Bug</h5>
+                        <p class="text-sm text-gray-600">Melakukan perbaikan dan penyempurnaan pada bug di website sesuai permintaan client, sehingga sistem menjadi lebih stabil dan optimal.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+
+            <section id="produk" class="py-20">
+                <h2 class="text-2xl font-bold mb-6">Produk</h2>
+
+                <!-- Container produk -->
+                <div id="produk-container"></div>
+            </section>
+
+            <section id="kontak">
+                <h2 class="text-2xl font-bold mb-4">Kontak</h2>
+                <p class="text-gray-600 mb-4">
+                Untuk kebutuhan bisnis ataupun kerja sama bisa kirim email ke
+                <a
+                    href="mailto:joko12prasteio@gmail.com"
+                    class="text-yellow-600 hover:underline"
+                >
+                    joko12prasteio@gmail.com
+                </a>
+                </p>
+
+                <p class="text-gray-600 mb-4">
+                    Atau langsung hubungi via WhatsApp:
+                    <a
+                    href="https://wa.me/6289646354963"
+                    target="_blank"
+                    class="text-green-600 font-semibold hover:underline"
+                    >
+                    0896-4635-4963
+                    </a>
+                </p>
+            </section>
+        </section>
+    </main>
+     <footer class="text-sm text-gray-500 white:text-gray-400 border-t border-gray-200 white:border-gray-800 py-6">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                <p id="footer-text" class="text-gray-600"></p>
+            </div>
+    </footer>
+</body>
+
+<script src="javascript/scripts.js"></script>
+</html>
