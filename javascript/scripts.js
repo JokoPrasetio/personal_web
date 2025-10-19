@@ -93,7 +93,7 @@
           <img src="${item.img}" alt="${item.name}" class="rounded-md mb-3 w-full h-auto">
           <h3 class="font-semibold">${item.name}</h3>
           <p class="text-sm text-gray-600 mb-4">${item.desc}</p>
-          <a href="${item.link}" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded mb-2" target="_blank">Kunjungin Halaman</a>
+          <a href="/${item.link}" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded mb-2" target="_blank">Kunjungin Halaman</a>
         `;
 
         grid.appendChild(card);
