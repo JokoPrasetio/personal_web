@@ -71,6 +71,12 @@
     });
 
     const produkList = [
+      {
+        name: 'Dashboard',
+        desc: 'Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan seperti poli, pemeriksaan, dan transaksi. Dibangun dengan Laravel + Vue untuk tampilan dinamis tanpa reload halaman.',
+        link: 'dashboard.rumahjooocode.com',
+        img: 'assets/dashboard.png'
+      }
     ];
 
     const containerProduk = document.getElementById("produk-container");
@@ -81,12 +87,13 @@
 
       produkList.forEach(item => {
         const card = document.createElement("div");
-        card.className = "p-4 border rounded-lg shadow hover:shadow-lg transition bg-white";
+        card.className = "p-3 border rounded-lg shadow hover:shadow-lg transition bg-white";
 
         card.innerHTML = `
           <img src="${item.img}" alt="${item.name}" class="rounded-md mb-3 w-full h-auto">
           <h3 class="font-semibold">${item.name}</h3>
-          <p class="text-sm text-gray-600">${item.desc}</p>
+          <p class="text-sm text-gray-600 mb-4">${item.desc}</p>
+          <a href="${item.link}" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded mb-2" target="_blank">Kunjungin Halaman</a>
         `;
 
         grid.appendChild(card);
