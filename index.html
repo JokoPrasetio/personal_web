@@ -241,7 +241,7 @@
     </footer>
     <div id="chat-widget" class="fixed bottom-4 right-4 z-40 flex flex-col items-end">
     <button id="chat-toggle" class="mb-3 flex items-center gap-2 bg-yellow-500 text-black px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition fw-semibold">
-       Chat
+        Chat Support
     </button>
 
     <div
@@ -254,13 +254,13 @@
                 <p class="font-bold text-sm">Chat Support</p>
                 <p class="text-xs opacity-80">Tanya seputar Rumah Joko / Project</p>
             </div>
-            <button id="chat-close" class="text-xl leading-none">&times;</button>
+            <button id="chat-close" class="text-xl leading-none cursor-pointer">&times;</button>
         </div>
 
         <div id="chat-box" class="h-72 p-3 space-y-2 overflow-y-auto bg-gray-50 text-sm">
             <div class="flex justify-start">
                 <div class="max-w-[80%] bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm">
-                    <p class="font-semibold text-xs text-gray-500 mb-1">Bot</p>
+                    <p class="font-semibold text-xs text-gray-500 mb-1">Customer Service</p>
                     <p>Halo! 👋 Ada yang bisa saya bantu?</p>
                 </div>
             </div>
@@ -276,7 +276,7 @@
             ></textarea>
             <button
                 type="submit"
-                class="text-sm bg-yellow-500 text-black px-3 py-2 rounded-lg hover:bg-yellow-400 transition"
+                class="text-sm bg-yellow-500 text-black px-3 py-2 rounded-lg hover:bg-yellow-400 transition cursor-pointer"
             >
                 Kirim
             </button>
@@ -318,12 +318,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openPanel() {
         chatPanel.classList.remove('hidden');
+        chatToggle.classList.add('hidden');
+
         isPanelOpen = true;
         chatInput.focus();
     }
 
     function closePanel() {
         chatPanel.classList.add('hidden');
+        chatToggle.classList.remove('hidden');
         isPanelOpen = false;
     }
 
@@ -371,7 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // TUTUP: klik di luar widget
     document.addEventListener('click', (e) => {
         if (!isPanelOpen) return;
-        // kalau klik di luar chatWidget, baru tutup
         if (!chatWidget.contains(e.target)) {
             closePanel();
         }
@@ -402,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
             role === 'user' ? 'text-black/80' : 'text-gray-500',
             'mb-1'
         );
-        label.textContent = role === 'user' ? 'Kamu' : 'Bot';
+        label.textContent = role === 'user' ? 'Kamu' : 'Customer Service';
 
         const msg = document.createElement('p');
         msg.textContent = text;
@@ -442,9 +444,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await res.json();
 
-            appendMessage('bot', data.reply || 'Maaf, terjadi kesalahan saat memproses jawaban.');
+            appendMessage('Customer Service', data.reply || 'Maaf, terjadi kesalahan saat memproses jawaban.');
         } catch (err) {
-            appendMessage('bot', 'Maaf, saya tidak dapat terhubung ke server.');
+            appendMessage('Customer Service', 'Maaf, saya tidak dapat terhubung ke server.');
         }
     });
 });
