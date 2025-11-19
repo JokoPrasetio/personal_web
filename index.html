@@ -260,7 +260,7 @@
         <div id="chat-box" class="h-72 p-3 space-y-2 overflow-y-auto bg-gray-50 text-sm">
             <div class="flex justify-start">
                 <div class="max-w-[80%] bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm">
-                    <p class="font-semibold text-xs text-gray-500 mb-1">Customer Service</p>
+                    <p class="font-semibold text-xs text-gray-500 mb-1">Bot AI</p>
                     <p>Halo! 👋 Ada yang bisa saya bantu?</p>
                 </div>
             </div>
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
             role === 'user' ? 'text-black/80' : 'text-gray-500',
             'mb-1'
         );
-        label.textContent = role === 'user' ? 'Kamu' : 'Customer Service';
+        label.textContent = role === 'user' ? 'Kamu' : 'Bot AI';
 
         const msg = document.createElement('p');
         msg.textContent = text;
