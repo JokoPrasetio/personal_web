@@ -1,0 +1,28 @@
+    :root {
+    --color-bg: #fafafa;
+    --color-text: #111827;
+    }
+
+    /* mode putih */
+    .white {
+    --color-bg: #fafafa;
+    --color-text: #111827;
+    }
+
+    body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+
+    /* scroll-smooth Tailwind */
+    scroll-behavior: smooth;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+    .mobile-menu.active {
+        display: block;
+    }
+
+
+  
