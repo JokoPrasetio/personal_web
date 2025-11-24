@@ -73,11 +73,22 @@
 
             <!-- Konten -->
             <section id="konten" class="py-20 max-w-5xl mx-auto px-6">
-                <h2 class="text-2xl font-bold mb-6">Konten</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Konten</h2>
 
-                <!-- container konten -->
+                    <div class="flex items-center gap-2 text-sm">
+                    <button id="konten-prev"
+                        class="w-8 h-8 flex items-center justify-center rounded-full border text-sm hover:bg-slate-100 cursor-pointer"><</button>
+                    <button id="konten-next"
+                        class="w-8 h-8 flex items-center justify-center rounded-full border text-sm hover:bg-slate-100 cursor-pointer">></button>
+                    </div>
+                </div>
+
                 <div id="konten-container"></div>
+
+                <div id="konten-indicator" class="mt-3 text-xs text-slate-500"></div>
             </section>
+
 
             <!-- Pengalaman -->
             <section id="history" class="py-20 ">
@@ -203,11 +214,22 @@
                 </div>
             </section>
 
-            <section id="produk" class="py-20">
-                <h2 class="text-2xl font-bold mb-6">Produk</h2>
-                <!-- Container produk -->
+            <section id="produk" class="py-20 max-w-5xl mx-auto px-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Produk</h2>
+
+                    <div class="flex gap-2">
+                    <button id="produk-prev"
+                        class="w-8 h-8 flex items-center justify-center rounded-full border hover:bg-slate-100 cursor-pointer"><</button>
+                    <button id="produk-next"
+                        class="w-8 h-8 flex items-center justify-center rounded-full border hover:bg-slate-100 cursor-pointer">></button>
+                    </div>
+                </div>
+
                 <div id="produk-container"></div>
+                <div id="produk-indicator" class="mt-3 text-xs text-slate-500"></div>
             </section>
+
 
             <section id="kontak">
                 <h2 class="text-2xl font-bold mb-4">Kontak</h2>

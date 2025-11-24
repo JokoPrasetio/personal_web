@@ -6,84 +6,125 @@
       menu.classList.toggle('active');
       // ubah ikon
       if (menu.classList.contains('active')) {
-        icon.textContent = "✖"; // X icon
+        icon.textContent = "âœ–"; // X icon
       } else {
-        icon.textContent = "☰"; // menu icon
+        icon.textContent = "â˜°"; // menu icon
       }
     });
 
-    async function loadYoutubeContent(){
+    const KONTEN_PER_PAGE = 3;
+    let kontenPages = [];
+    let kontenCurrentPage = 0;
+
+    async function loadYoutubeContent() {
       const container = document.getElementById("konten-container");
-        container.innerHTML = `
-          <div class="text-center py-6 text-gray-500 text-sm">
-            Memuat konten YouTube...
-          </div>
-        `;
+      const indicator = document.getElementById("konten-indicator");
+      const btnPrev = document.getElementById("konten-prev");
+      const btnNext = document.getElementById("konten-next");
+
+      container.innerHTML = `
+        <div class="text-center py-6 text-gray-500 text-sm">
+          Memuat konten YouTube...
+        </div>
+      `;
+
       try {
-        const res = await fetch('/api/youtube.php')
-        if(!res.ok){
-          throw new Error('HTTP status ' + res.status)
-        }
-        const data = await res.json()
+        const res = await fetch("/api/youtube.php");
+        if (!res.ok) throw new Error("HTTP status " + res.status);
+
+        const data = await res.json();
         const items = Array.isArray(data.items) ? data.items : [];
-        console.log(items);
-        
-        if(items.length === 0){
+
+        if (!items.length) {
           container.innerHTML = `
             <div class="text-center py-12 bg-gray-50 border rounded-lg">
               <p class="text-gray-600">📌 Konten belum tersedia</p>
               <p class="font-semibold text-yellow-600 mt-2">Coming Soon...</p>
             </div>
           `;
-          return
+          return;
         }
+
+        // buat halaman (3 per halaman)
+        kontenPages = [];
+        for (let i = 0; i < items.length; i += KONTEN_PER_PAGE) {
+          kontenPages.push(items.slice(i, i + KONTEN_PER_PAGE));
+        }
+        kontenCurrentPage = 0;
+
+        renderKontenPage();
+
+        btnPrev.onclick = () => {
+          if (kontenCurrentPage > 0) {
+            kontenCurrentPage--;
+            renderKontenPage();
+          }
+        };
+
+        btnNext.onclick = () => {
+          if (kontenCurrentPage < kontenPages.length - 1) {
+            kontenCurrentPage++;
+            renderKontenPage();
+          }
+        };
+
+      } catch (error) {
+        container.innerHTML = `
+          <div class="text-center py-12 bg-gray-50 border rounded-lg">
+            <p class="text-red-600 font-semibold mb-2">Gagal memuat konten YouTube</p>
+            <p class="text-gray-600 text-sm">${error.message}</p>
+          </div>
+        `;
+      }
+
+      function renderKontenPage() {
+        const pageItems = kontenPages[kontenCurrentPage];
+        const totalPages = kontenPages.length;
+
         const grid = document.createElement("div");
-        grid.className = "grid grid-cols-1 md:grid-cols-3 gap-6";
+        grid.className =
+          "grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 duration-300";
 
-        // loop tiap video
-        items.forEach(item => {
-          const snippet = item.snippet || {};
-          const title = snippet.title || 'Tanpa judul';
-          const descRaw = snippet.description || '';
-          const desc = descRaw.length > 80 ? descRaw.substring(0, 80) + '...' : descRaw;
+        pageItems.forEach((item) => {
+          const s = item.snippet;
+          const title = s.title;
+          const img = s.thumbnails.high.url;
+          const desc = s.description.length > 80 ? s.description.substring(0, 80) + "..." : s.description;
+          const videoId = item.id.videoId;
 
-          const thumbs = snippet.thumbnails || {};
-          const img =
-            (thumbs.high && thumbs.high.url) ||
-            (thumbs.medium && thumbs.medium.url) ||
-            (thumbs.default && thumbs.default.url) ||
-            '';
-
-          const videoId = item.id && item.id.videoId ? item.id.videoId : null;
-
-          const card = document.createElement("div");
-          card.className = "p-4 border rounded-lg shadow hover:shadow-lg transition bg-white";
+          const card = document.createElement("article");
+          card.className =
+            "bg-white/80 border border-slate-200 rounded-2xl shadow-sm " +
+            "overflow-hidden hover:-translate-y-1 hover:shadow-xl";
 
           card.innerHTML = `
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener">
-              <img src="${img}" alt="${title}" class="rounded-md mb-3 w-full h-auto">
-              <h3 class="font-semibold mb-1 line-clamp-2">${title}</h3>
-              <p class="text-sm text-gray-600 line-clamp-3">${desc}</p>
+            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="group flex flex-col h-full">
+              <div class="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 duration-300" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              </div>
+
+              <div class="px-4 py-3">
+                <h3 class="font-semibold text-sm line-clamp-2">${title}</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">${desc}</p>
+              </div>
             </a>
           `;
 
           grid.appendChild(card);
         });
 
-        // replace konten lama dengan grid baru
-        container.innerHTML = '';
+        container.innerHTML = "";
         container.appendChild(grid);
 
-      } catch (error) {
-        container.innerHTML = `
-           <div class="text-center py-12 bg-gray-50 border rounded-lg">
-              <p class="text-gray-600">📌 Gagal memuat konten</p>
-              <p class="font-semibold text-yellow-600 mt-2">${error.message}</p>
-            </div>
-        `;
+        indicator.innerHTML = `Halaman ${kontenCurrentPage + 1} / ${totalPages}`;
+
+        btnPrev.disabled = kontenCurrentPage === 0;
+        btnNext.disabled = kontenCurrentPage === totalPages - 1;
       }
     }
-    loadYoutubeContent()
+
+
 
     document.querySelectorAll('.job button').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -104,47 +145,134 @@
       });
     });
 
-    const produkList = [
-      {
-        name: 'Dashboard',
-        desc: 'Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan seperti poli, pemeriksaan, dan transaksi. Dibangun dengan Laravel + Vue untuk tampilan dinamis tanpa reload halaman.',
-        link: 'https://www.dashboard.rumahjooocode.com',
-        img: 'assets/dashboard.png'
+  const PRODUK_PER_PAGE = 3;
+  let produkPages = [];
+  let produkCurrentPage = 0;
+
+  const produkList = [
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
+    // tambah produk lain di sini
+  ];
+
+  function loadProdukCarousel() {
+    const container = document.getElementById("produk-container");
+    const indicator = document.getElementById("produk-indicator");
+    const btnPrev = document.getElementById("produk-prev");
+    const btnNext = document.getElementById("produk-next");
+
+    if (!produkList.length) {
+      container.innerHTML = `
+        <div class="text-center py-12 bg-gray-50 border rounded-lg">Produk belum tersedia</div>
+      `;
+      return;
+    }
+
+    // buat halaman 3 produk per halaman
+    produkPages = [];
+    for (let i = 0; i < produkList.length; i += PRODUK_PER_PAGE) {
+      produkPages.push(produkList.slice(i, i + PRODUK_PER_PAGE));
+    }
+    produkCurrentPage = 0;
+
+    renderProdukPage();
+
+    btnPrev.onclick = () => {
+      if (produkCurrentPage > 0) {
+        produkCurrentPage--;
+        renderProdukPage();
       }
-    ];
+    };
 
-    const containerProduk = document.getElementById("produk-container");
+    btnNext.onclick = () => {
+      if (produkCurrentPage < produkPages.length - 1) {
+        produkCurrentPage++;
+        renderProdukPage();
+      }
+    };
 
-    if (produkList.length > 0) {
+    function renderProdukPage() {
+      const pageItems = produkPages[produkCurrentPage];
+      const totalPages = produkPages.length;
+
       const grid = document.createElement("div");
-      grid.className = "grid grid-cols-1 md:grid-cols-3 gap-6";
+      grid.className = "grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
-      produkList.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "p-3 border rounded-lg shadow hover:shadow-lg transition bg-white";
+      pageItems.forEach((item) => {
+        const card = document.createElement("article");
+        card.className =
+          "bg-white/80 border rounded-2xl shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-xl transition";
 
         card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}" class="rounded-md mb-3 w-full h-auto">
-          <h3 class="font-semibold">${item.name}</h3>
-          <p class="text-sm text-gray-600 mb-4">${item.desc}</p>
-          <a href="${item.link}" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded mb-2" target="_blank">Kunjungin Halaman</a>
+          <a href="${item.link}" target="_blank" class="group flex flex-col h-full">
+            <div class="relative aspect-[16/10] overflow-hidden bg-slate-200">
+              <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 duration-300" />
+              <div class="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
+                Produk
+              </div>
+            </div>
+
+            <div class="p-4 flex-1 flex flex-col">
+              <h3 class="text-sm font-semibold mb-1 line-clamp-2">${item.name}</h3>
+              <p class="text-xs text-slate-600 line-clamp-3">${item.desc}</p>
+
+              <div class="mt-3">
+                <span class="inline-flex items-center justify-center gap-1 bg-blue-600 text-white text-xs py-2 px-3 rounded-lg hover:bg-blue-700 transition">
+                  Kunjungi Halaman →
+                </span>
+              </div>
+            </div>
+          </a>
         `;
 
         grid.appendChild(card);
       });
 
-      containerProduk.appendChild(grid);
-    } else {
-      containerProduk.innerHTML = `
-        <div class="text-center py-12 bg-gray-50 border rounded-lg">
-          <p class="text-gray-600">📦 Produk belum tersedia</p>
-          <p class="font-semibold text-yellow-600 mt-2">Coming Soon...</p>
-        </div>
-      `;
+      container.innerHTML = "";
+      container.appendChild(grid);
+
+      indicator.innerHTML = `Halaman ${produkCurrentPage + 1} / ${totalPages}`;
+
+      btnPrev.disabled = produkCurrentPage === 0;
+      btnNext.disabled = produkCurrentPage === totalPages - 1;
     }
+  }
 
   const year = new Date().getFullYear();
-  document.getElementById("footer-text").textContent = `© ${year} Joko Prasetio`;
+  document.getElementById("footer-text").textContent = `Â© ${year} Joko Prasetio`;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadYoutubeContent();
+    loadProdukCarousel();
+  });
 
 
-  document.addEventListener('DOMContentLoaded', loadYoutubeContent);
+  
