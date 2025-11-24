@@ -26,6 +26,8 @@
         }
         const data = await res.json()
         const items = Array.isArray(data.items) ? data.items : [];
+        console.log(items);
+        
         if(items.length === 0){
           container.innerHTML = `
             <div class="text-center py-12 bg-gray-50 border rounded-lg">
@@ -145,3 +147,4 @@
   document.getElementById("footer-text").textContent = `© ${year} Joko Prasetio`;
 
 
+  document.addEventListener('DOMContentLoaded', loadYoutubeContent);
