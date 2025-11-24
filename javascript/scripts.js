@@ -6,9 +6,9 @@
       menu.classList.toggle('active');
       // ubah ikon
       if (menu.classList.contains('active')) {
-        icon.textContent = "âœ–"; // X icon
+        icon.textContent = "X"; // X icon
       } else {
-        icon.textContent = "â˜°"; // menu icon
+        icon.textContent = "☰"; // menu icon
       }
     });
 
@@ -156,31 +156,6 @@
       link: "https://dashboard.rumahjooocode.com",
       img: "assets/dashboard.png",
     },
-    {
-      name: "Dashboard",
-      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
-      img: "assets/dashboard.png",
-    },
-    {
-      name: "Dashboard",
-      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
-      img: "assets/dashboard.png",
-    },
-    {
-      name: "Dashboard",
-      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
-      img: "assets/dashboard.png",
-    },
-    {
-      name: "Dashboard",
-      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
-      img: "assets/dashboard.png",
-    },
-    // tambah produk lain di sini
   ];
 
   function loadProdukCarousel() {
@@ -267,7 +242,7 @@
   }
 
   const year = new Date().getFullYear();
-  document.getElementById("footer-text").textContent = `Â© ${year} Joko Prasetio`;
+  document.getElementById("footer-text").textContent = `© ${year} Joko Prasetio`;
 
   document.addEventListener("DOMContentLoaded", () => {
     loadYoutubeContent();
