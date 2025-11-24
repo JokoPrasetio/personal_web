@@ -1,7 +1,12 @@
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('mobile-menu');
     const icon = document.getElementById('menu-icon');
-
+    function getItemsPerPage() {
+      const w = window.innerWidth;
+      if (w < 640) return 1;      // mobile
+      if (w < 1024) return 2;     // tablet
+      return 3;                   // desktop
+    }
     toggle.addEventListener('click', () => {
       menu.classList.toggle('active');
       // ubah ikon
@@ -46,9 +51,10 @@
         }
 
         // buat halaman (3 per halaman)
+        const perPage = getItemsPerPage();
         kontenPages = [];
-        for (let i = 0; i < items.length; i += KONTEN_PER_PAGE) {
-          kontenPages.push(items.slice(i, i + KONTEN_PER_PAGE));
+        for (let i = 0; i < items.length; i += perPage) {
+          kontenPages.push(items.slice(i, i + perPage));
         }
         kontenCurrentPage = 0;
 
@@ -145,11 +151,16 @@
       });
     });
 
-  const PRODUK_PER_PAGE = 3;
   let produkPages = [];
   let produkCurrentPage = 0;
 
   const produkList = [
+    {
+      name: "Dashboard",
+      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
+      link: "https://dashboard.rumahjooocode.com",
+      img: "assets/dashboard.png",
+    },
     {
       name: "Dashboard",
       desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
@@ -172,9 +183,10 @@
     }
 
     // buat halaman 3 produk per halaman
+    const perPage = getItemsPerPage();
     produkPages = [];
-    for (let i = 0; i < produkList.length; i += PRODUK_PER_PAGE) {
-      produkPages.push(produkList.slice(i, i + PRODUK_PER_PAGE));
+    for (let i = 0; i < produkList.length; i += perPage) {
+      produkPages.push(produkList.slice(i, i + perPage));
     }
     produkCurrentPage = 0;
 
