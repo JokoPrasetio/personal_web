@@ -158,15 +158,9 @@
     {
       name: "Dashboard",
       desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
+      link: "http://dashboardv1.rumahjooocode.com/",
       img: "assets/dashboard.png",
-    },
-    {
-      name: "Dashboard",
-      desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "https://dashboard.rumahjooocode.com",
-      img: "assets/dashboard.png",
-    },
+    }
   ];
 
   function loadProdukCarousel() {
