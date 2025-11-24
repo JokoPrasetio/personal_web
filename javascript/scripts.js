@@ -158,7 +158,7 @@
     {
       name: "Dashboard",
       desc: "Modul pusat kontrol yang menampilkan ringkasan data dari berbagai layanan.",
-      link: "http://dashboardv1.rumahjooocode.com/",
+      link: "https://dashboardv1.rumahjooocode.com/",
       img: "assets/dashboard.png",
     }
   ];
